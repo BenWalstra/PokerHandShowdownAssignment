@@ -40,21 +40,12 @@ namespace PokerHandShowdown
         }
 
         /// <summary>
-        /// Assigns player 5 cards from passed in deck and removes said 5 cards from deck so
-        /// that they cannont be used again.
+        /// Assigns player 5 cards from passed in playing cards.
         /// </summary>
-        /// <param name="deck"> Is a REFRENCE to the deck built inside the <see cref="FiveCardPokerGame"/> class. </param>
-        public void DealHand(List<ICard> deck)
+        public void DealHand(List<ICard> hand)
         {
             Hand.Clear();
-            Random rnd = new Random();
-
-            for (int i = 0; i < 5; i++)
-            {
-                ICard card = deck[rnd.Next(deck.Count)];
-                Hand.Add(card);
-                deck.Remove(card);
-            }
+            Hand = hand;
             OrderHand();
         }
 

@@ -32,8 +32,9 @@ namespace TestLibrary
         public static void Check_Player_Hand_Has_5_Unique_Cards()
         {
             Player player = new Player("Ben");
-            Deck deck = new Deck();
-            player.DealHand(deck.CompleteDeck);
+            List<Player> players = new List<Player>{ player };
+            FiveCardPokerGame game = new FiveCardPokerGame(players);
+            game.BeginRound();
 
             // Get Unique Cards
             List<ICard> cards = player.Hand.Select(x => x).Distinct().ToList();

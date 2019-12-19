@@ -36,7 +36,16 @@ namespace PokerHandShowdown
             Deck = new Deck();
             foreach (var player in Players)
             {
-                player.DealHand(Deck.CompleteDeck);
+                Random rnd = new Random();
+                List<ICard> hand = new List<ICard>();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    ICard card = Deck.CompleteDeck[rnd.Next(Deck.CompleteDeck.Count)];
+                    hand.Add(card);
+                    Deck.CompleteDeck.Remove(card);
+                }
+                player.DealHand(hand);
             }
         }
 
