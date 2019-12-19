@@ -21,7 +21,7 @@ namespace PokerHandShowdown
         public List<Player> TiedPlayers { get; set; }
         public Player Winner { get; set; }
         public Deck Deck { get; set; }
-
+        
         public FiveCardPokerGame(List<Player> players)
         {
             Players = players;
@@ -64,6 +64,7 @@ namespace PokerHandShowdown
 
 
         #region Check Round Winner
+
         /// <summary>
         /// Determins the round winner/winners and returns their name/names and how they won
         /// as a formated message.
@@ -86,7 +87,7 @@ namespace PokerHandShowdown
             else
             {
                 //Determines the player/players with the Highest Single card.
-                List<Player> winners = CheckHighCardPlayer(Players);
+                List<Player> winners = GetHighCardPlayers(Players);
                 if(winners.Count == 1)
                 {
                     Winner = winners.SingleOrDefault();
@@ -118,7 +119,7 @@ namespace PokerHandShowdown
                 Winner = playersWithFlush.SingleOrDefault();
                 return true;
             }
-            DetermineWinnersWithHighCard(CheckHighCardPlayer(playersWithFlush));
+            DetermineWinnersWithHighCard(GetHighCardPlayers(playersWithFlush));
             return true;
         }
 
@@ -127,7 +128,7 @@ namespace PokerHandShowdown
         /// </summary>
         public bool CheckForThreeOfaKind()
         {
-            List<Player> playersWithThreeOfaKind= Players.Where(x => x.CheckForThreeOfaKind() == true).ToList();
+            List<Player> playersWithThreeOfaKind = Players.Where(x => x.CheckForThreeOfaKind() == true).ToList();
 
             if (playersWithThreeOfaKind.Count == 0) return false;
             if (playersWithThreeOfaKind.Count == 1)
@@ -159,7 +160,7 @@ namespace PokerHandShowdown
             } 
             else
             {
-                DetermineWinnersWithHighCard(CheckHighCardPlayer(playersWithHighestThreeOfaKind));
+                DetermineWinnersWithHighCard(GetHighCardPlayers(playersWithHighestThreeOfaKind));
             }
             
             return true;
@@ -201,34 +202,44 @@ namespace PokerHandShowdown
             }
             else
             {
-                DetermineWinnersWithHighCard(CheckHighCardPlayer(playersWithHighestOnePair));
+                DetermineWinnersWithHighCard(GetHighCardPlayers(playersWithHighestOnePair));
             }
             return true;
         }
 
+        #endregion
+
+
+        #region Helpers
         /// <summary>
         /// Recursive function to get the highest card out of a list of players and assign the winner/winners
         /// </summary>
-        private List<Player> CheckHighCardPlayer(List<Player> players)
+        private List<Player> GetHighCardPlayers(List<Player> players)
         {
             if (players.Count == 1) return players;
+
+            // Checks to see if there are still players left but their hands are empty.
+            // If this is the case then we have a tie.
             if (players.Count(x => !x.Hand.Any()) == players.Count) return players;
 
+            // Gets the highest player card in the list of players.
             var max = players.Max(x => x.HighCard.CardValue);
-            players = players.Where(x => x.HighCard.CardValue == max).ToList();
-            if (players.Count == 1) return CheckHighCardPlayer(players);
 
+            // Gets all players who also have the current highest card.
+            players = players.Where(x => x.HighCard.CardValue == max).ToList();
+
+            // If only one player left they win, return player.
+            if (players.Count == 1) return players;
+
+            // Hands are ordered by lowest to highest, we remove every players last card to move
+            // onto the next highest card.
             foreach (var item in players)
             {
                 var lastValue = item.Hand.LastOrDefault();
                 item.Hand.Remove(lastValue);
             }
-            return CheckHighCardPlayer(players);
+            return GetHighCardPlayers(players);
         }
-        #endregion
-
-
-        #region Helpers
         private void DetermineWinnersWithHighCard(List<Player> winners)
         {
             if (winners.Count == 1)
@@ -240,7 +251,6 @@ namespace PokerHandShowdown
             {
                 TiedPlayers = winners;
             }
-
         }
         public string FindWinningMessage(string winType)
         {

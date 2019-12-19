@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokerHandShowdown
 {
     /// <summary>
-    /// Diamond - A class for representing all cards that are diamons.
+    /// Diamond - A class for representing all cards that are diamonds.
     /// 
     /// Date Created:   December. 16th, 2019
     /// 

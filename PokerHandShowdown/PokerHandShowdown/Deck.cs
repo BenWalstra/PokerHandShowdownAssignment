@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokerHandShowdown
 {
     /// <summary>
-    /// Deck - A class for representing the card Deck for a card game.
+    /// Deck - A class for representing the playing card deck for a card game.
     /// 
     /// Date Created:   December. 16th, 2019
     /// 

@@ -25,6 +25,14 @@ namespace PokerHandShowdown
             if(numberOfPlayers <= 1 || numberOfPlayers > 6) isValid = false;
             return isValid;
         }
+
+        public static bool ValidateNumberOfPlayers(int numberOfPlayers)
+        {
+            bool isValid = true;
+            if (numberOfPlayers <= 1 || numberOfPlayers > 6) isValid = false;
+            return isValid;
+        }
+
         public static bool ValidateUniqueUserNames(string name, List<Player> players)
         {
             bool isValid = true;

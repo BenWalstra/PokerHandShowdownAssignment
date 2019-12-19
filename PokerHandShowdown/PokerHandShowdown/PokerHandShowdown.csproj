@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CardTypes\Spade.cs" />
     <Compile Include="Enums\Suits.cs" />
+    <Compile Include="UnitTests\ValidateFiveCardPokerGameTest.cs" />
     <Compile Include="Validation\ValidateFiveCardPokerGame.cs" />
   </ItemGroup>
   <ItemGroup>

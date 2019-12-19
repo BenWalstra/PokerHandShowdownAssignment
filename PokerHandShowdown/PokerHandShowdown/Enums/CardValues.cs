@@ -24,6 +24,5 @@ namespace PokerHandShowdown
         Queen = 11,
         King = 12,
         Ace = 13,
-
     }
 }

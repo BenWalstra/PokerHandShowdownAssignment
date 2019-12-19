@@ -19,7 +19,7 @@ namespace TestLibrary
     public class PlayerTest
     {
         [Test]
-        public static void Player_Constructor()
+        public static void Test_Player_Constructor()
         {
             string name = "test";
             Player player = new Player(name);
@@ -29,7 +29,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Hand_Has_5_Unique_Cards()
+        public static void Test_Player_Hand_Has_5_Unique_Cards()
         {
             Player player = new Player("Ben");
             List<Player> players = new List<Player>{ player };
@@ -44,7 +44,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_Flush()
+        public static void Test_Player_Has_Flush()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -64,7 +64,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_No_Flush()
+        public static void Test_Player_Has_No_Flush()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -84,7 +84,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_Three_Of_a_Kind()
+        public static void Test_Player_Has_Three_Of_a_Kind()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -104,7 +104,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_No_Three_Of_a_Kind()
+        public static void Test_Player_Has_No_Three_Of_a_Kind()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -124,7 +124,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_One_Pair()
+        public static void Test_Player_Has_One_Pair()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -144,7 +144,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Has_No_One_Pair()
+        public static void Test_Player_Has_No_One_Pair()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -164,7 +164,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_High_Card()
+        public static void Test_Player_High_Card()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -186,7 +186,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Not_High_Card()
+        public static void Test_Player_Not_High_Card()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -208,7 +208,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_Three_of_A_Kind_Sum()
+        public static void Test_Player_Three_of_A_Kind_Sum()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -229,7 +229,7 @@ namespace TestLibrary
         }
 
         [Test]
-        public static void Check_Player_One_Pair_Sum()
+        public static void Test_Player_One_Pair_Sum()
         {
             Player player = new Player("Ben");
             ICard card;
@@ -247,6 +247,21 @@ namespace TestLibrary
 
             Assert.IsTrue(player.CheckForOnePair());
             Assert.AreEqual(13, player.onePairSum);
+        }
+
+        [Test]
+        public static void Test_Player_New_Hand_Not_Same_As_Last()
+        {
+            Player player = new Player("Ben");
+            FiveCardPokerGame game = new FiveCardPokerGame(new List<Player> { player });
+            game.BeginRound();
+
+            List<ICard> hand1 = new List<ICard>();
+            hand1.AddRange(player.Hand);
+            game.BeginRound();
+            List<ICard> hand2 = player.Hand;
+
+            Assert.AreNotEqual(hand1, hand2);
         }
     }
 }

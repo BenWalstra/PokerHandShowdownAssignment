@@ -16,9 +16,9 @@ namespace PokerHandShowdown
     /// </summary>\
     public class Player : ICheckCards
     {
-        // Holds the card value of Three of a kind. Used to make handling finding highestthree of a kind easier.
+        // Holds the card value of Three of a kind. Used to make handling finding highest three of a kind easier.
         public int threeOfaKindSum = 0;
-        /// Holds the card value of One Pair. Used to make handiling finding highest One Pair easier.
+        // Holds the card value of One Pair. Used to make handiling finding highest One Pair easier.
         public int onePairSum = 0;
 
         public string Name { get; private set; }

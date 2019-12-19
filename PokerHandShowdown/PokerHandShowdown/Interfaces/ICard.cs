@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokerHandShowdown
 {
     /// <summary>
-    /// ICard - A Interce used for representing the diffrent kinds of playing cards ex. Ace of Spaces, Three of Clubs.
+    /// ICard - A Interce used for representing the diffrent kinds of playing cards ex. Ace of Spades, Three of Clubs.
     /// 
     /// Date Created:   December. 16th, 2019
     /// 
