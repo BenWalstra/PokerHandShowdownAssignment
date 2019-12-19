@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NetSpell.SpellChecker, Version=2.1.7.41329, Culture=neutral, PublicKeyToken=318b389f0db66e46">
+      <HintPath>..\packages\NetSpell.2.1.7\lib\NetSpell.SpellChecker.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -57,7 +60,7 @@
     <Compile Include="CardTypes\Diamond.cs" />
     <Compile Include="FiveCardPokerGame.cs" />
     <Compile Include="UnitTests\PlayerTest.cs" />
-    <Compile Include="UnitTests\GameTest.cs" />
+    <Compile Include="UnitTests\FiveCardPokerGameTest.cs" />
     <Compile Include="CardTypes\Heart.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Interfaces\ICard.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CardTypes\Spade.cs" />
     <Compile Include="Enums\Suits.cs" />
+    <Compile Include="Validation\ValidateFiveCardPokerGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

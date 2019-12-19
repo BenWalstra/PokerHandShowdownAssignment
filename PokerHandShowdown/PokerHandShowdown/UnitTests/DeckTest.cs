@@ -70,7 +70,6 @@ namespace TestLibrary
             {
                 Assert.IsFalse(game.Deck.CompleteDeck.Contains(playerCard));
             }
-            
         }
     }
 }

@@ -17,7 +17,7 @@ namespace PokerHandShowdown
     public class FiveCardPokerGame : ICheckCards
     {
         private bool _wonWithHighCard = false;
-        public List<Player> Players { get; set; }
+        public List<Player> Players { get; private set; }
         public List<Player> TiedPlayers { get; set; }
         public Player Winner { get; set; }
         public Deck Deck { get; set; }
@@ -62,8 +62,8 @@ namespace PokerHandShowdown
             return playerHands;
         }
 
-        #region Check Round Winner
 
+        #region Check Round Winner
         /// <summary>
         /// Determins the round winner/winners and returns their name/names and how they won
         /// as a formated message.
@@ -71,20 +71,21 @@ namespace PokerHandShowdown
         public string GetRoundWinner()
         {
             string winningMessage = string.Empty;
-            if (CheckFlush())
+            if (CheckForFlush())
             {
                 winningMessage = FindWinningMessage("Flush");
             }
-            else if (CheckThreeOfKind())
+            else if (CheckForThreeOfaKind())
             {
                 winningMessage = FindWinningMessage("Three of a Kind");
             }
-            else if (CheckOnePair())
+            else if (CheckForOnePair())
             {
                 winningMessage = FindWinningMessage("One Pair");
             }
             else
             {
+                //Determines the player/players with the Highest Single card.
                 List<Player> winners = CheckHighCardPlayer(Players);
                 if(winners.Count == 1)
                 {
@@ -98,15 +99,17 @@ namespace PokerHandShowdown
 
             // Checks to see if the user tied with a flush, three of a kind or one pair
             // but had the higher card.
-            if (_wonWithHighCard)
-            {
-                winningMessage += " and High Card";
-            }
+            if (_wonWithHighCard) winningMessage += " and High Card";
+
             return winningMessage;
         }
-        public bool CheckFlush()
+
+        /// <summary>
+        /// Checks to see if any players have a flush and determines winner/winners.
+        /// </summary>
+        public bool CheckForFlush()
         {
-            List<Player> playersWithFlush = Players.Where(x => x.CheckFlush() == true).ToList();
+            List<Player> playersWithFlush = Players.Where(x => x.CheckForFlush() == true).ToList();
 
             if (playersWithFlush.Count == 0) return false;
 
@@ -118,9 +121,13 @@ namespace PokerHandShowdown
             DetermineWinnersWithHighCard(CheckHighCardPlayer(playersWithFlush));
             return true;
         }
-        public bool CheckThreeOfKind()
+
+        /// <summary>
+        /// Checks to see if any players have three of a kind and determines winner/winners.
+        /// </summary>
+        public bool CheckForThreeOfaKind()
         {
-            List<Player> playersWithThreeOfaKind= Players.Where(x => x.CheckThreeOfKind() == true).ToList();
+            List<Player> playersWithThreeOfaKind= Players.Where(x => x.CheckForThreeOfaKind() == true).ToList();
 
             if (playersWithThreeOfaKind.Count == 0) return false;
             if (playersWithThreeOfaKind.Count == 1)
@@ -131,34 +138,39 @@ namespace PokerHandShowdown
 
             List<Player> playersWithHighestThreeOfaKind = new List<Player>();
             int sum = 0;
+
+            // Checks to see who has highest card out of their Three of a Kind.
             foreach (var player in playersWithThreeOfaKind)
             {
-                if(player.ThreeOfaKindSum >= sum)
+                if(player.threeOfaKindSum >= sum)
                 {
-                    if(player.ThreeOfaKindSum > sum)
-                    {
-                        playersWithHighestThreeOfaKind.Clear();
-                    }
+                    if(player.threeOfaKindSum > sum) playersWithHighestThreeOfaKind.Clear();
+
                     playersWithHighestThreeOfaKind.Add(player);
-                    sum = player.ThreeOfaKindSum;
+                    sum = player.threeOfaKindSum;
                 } 
             }
 
             // If theres only 1 player left then their 3 of a kind is higher so they win.
-            // This is always the case the check is done to meet assignmnet requirements.
+            // This is always the case the check is done to meet assignment requirements.
             if(playersWithHighestThreeOfaKind.Count == 1)
             {
                 Winner = playersWithHighestThreeOfaKind.SingleOrDefault();
-            } else
+            } 
+            else
             {
                 DetermineWinnersWithHighCard(CheckHighCardPlayer(playersWithHighestThreeOfaKind));
             }
             
             return true;
         }
-        public bool CheckOnePair()
+
+        /// <summary>
+        /// Checks to see if any players have one pair and determines winner/winners.
+        /// </summary>
+        public bool CheckForOnePair()
         {
-            List<Player> playersWithOnePair = Players.Where(x => x.CheckOnePair() == true).ToList();
+            List<Player> playersWithOnePair = Players.Where(x => x.CheckForOnePair() == true).ToList();
 
             if (playersWithOnePair.Count == 0) return false;
             if (playersWithOnePair.Count == 1)
@@ -171,14 +183,14 @@ namespace PokerHandShowdown
             int sum = 0;
             foreach (var player in playersWithOnePair)
             {
-                if (player.OnePairSum >= sum)
+                if (player.onePairSum >= sum)
                 {
-                    if (player.OnePairSum > sum)
+                    if (player.onePairSum > sum)
                     {
                         playersWithHighestOnePair.Clear();
                     }
                     playersWithHighestOnePair.Add(player);
-                    sum = player.OnePairSum;
+                    sum = player.onePairSum;
                 }
             }
 
@@ -213,7 +225,10 @@ namespace PokerHandShowdown
             }
             return CheckHighCardPlayer(players);
         }
+        #endregion
 
+
+        #region Helpers
         private void DetermineWinnersWithHighCard(List<Player> winners)
         {
             if (winners.Count == 1)
@@ -227,10 +242,6 @@ namespace PokerHandShowdown
             }
 
         }
-
-        #endregion
-
-        #region Helpers
         public string FindWinningMessage(string winType)
         {
             string msg = string.Empty;

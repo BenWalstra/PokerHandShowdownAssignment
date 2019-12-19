@@ -16,8 +16,8 @@ namespace PokerHandShowdown
     /// </summary>\
     interface ICheckCards
     {
-        bool CheckOnePair();
-        bool CheckThreeOfKind();
-        bool CheckFlush();
+        bool CheckForOnePair();
+        bool CheckForThreeOfaKind();
+        bool CheckForFlush();
     }
 }

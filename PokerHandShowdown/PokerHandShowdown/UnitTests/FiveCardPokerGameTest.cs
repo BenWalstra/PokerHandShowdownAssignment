@@ -16,7 +16,7 @@ namespace TestLibrary
     /// @version 1.0
     /// </summary>\
     [TestFixture]
-    public class GameTest
+    public class FiveCardpokerGameTest
     {
         [Test]
         public static void Get_User_With_Flush_Test()
@@ -39,10 +39,12 @@ namespace TestLibrary
             cards.Add(c);
 
             players.Add(player);
+
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player.Hand = cards;
 
-            Assert.That(game.CheckFlush(), Is.True);
+            Assert.That(game.CheckForFlush(), Is.True);
         }
 
         [Test]
@@ -68,9 +70,10 @@ namespace TestLibrary
 
             players.Add(player);
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player.Hand = cards;
 
-            Assert.That(game.CheckFlush(), Is.False);
+            Assert.That(game.CheckForFlush(), Is.False);
         }
 
         [Test]
@@ -112,6 +115,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             game.GetRoundWinner();
@@ -157,11 +161,12 @@ namespace TestLibrary
             players.Add(player1);
             players.Add(player2);
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 
 
-            Assert.That(game.CheckFlush(), Is.True);
+            Assert.That(game.CheckForFlush(), Is.True);
         }
 
         [Test]
@@ -204,6 +209,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 
@@ -250,6 +256,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 
@@ -296,6 +303,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             Assert.That(game.GetRoundWinner(), Is.EqualTo(winningMsg));
@@ -357,6 +365,7 @@ namespace TestLibrary
             players.Add(player3);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             player3.Hand = cards3;
@@ -404,6 +413,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             Assert.That(game.GetRoundWinner(), Is.EqualTo(winningMsg));
@@ -449,6 +459,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             Assert.That(game.GetRoundWinner(), Is.EqualTo(winningMsg));
@@ -494,6 +505,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             Assert.That(game.GetRoundWinner(), Is.EqualTo(winningMsg));
@@ -539,6 +551,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
             Assert.That(game.GetRoundWinner(), Is.EqualTo(winningMsg));
@@ -584,6 +597,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 
@@ -630,6 +644,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 
@@ -676,6 +691,7 @@ namespace TestLibrary
             players.Add(player2);
 
             FiveCardPokerGame game = new FiveCardPokerGame(players);
+            
             player1.Hand = cards1;
             player2.Hand = cards2;
 

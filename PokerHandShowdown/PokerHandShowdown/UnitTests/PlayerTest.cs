@@ -60,7 +60,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsTrue(player.CheckFlush());
+            Assert.IsTrue(player.CheckForFlush());
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsFalse(player.CheckFlush());
+            Assert.IsFalse(player.CheckForFlush());
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsTrue(player.CheckThreeOfKind());
+            Assert.IsTrue(player.CheckForThreeOfaKind());
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsFalse(player.CheckThreeOfKind());
+            Assert.IsFalse(player.CheckForThreeOfaKind());
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsTrue(player.CheckOnePair());
+            Assert.IsTrue(player.CheckForOnePair());
         }
 
         [Test]
@@ -160,7 +160,7 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsFalse(player.CheckOnePair());
+            Assert.IsFalse(player.CheckForOnePair());
         }
 
         [Test]
@@ -224,8 +224,8 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsTrue(player.CheckThreeOfKind());
-            Assert.AreEqual(13, player.ThreeOfaKindSum);
+            Assert.IsTrue(player.CheckForThreeOfaKind());
+            Assert.AreEqual(13, player.threeOfaKindSum);
         }
 
         [Test]
@@ -245,8 +245,8 @@ namespace TestLibrary
             card = new Spade(CardValues.Five);
             player.Hand.Add(card);
 
-            Assert.IsTrue(player.CheckOnePair());
-            Assert.AreEqual(13, player.OnePairSum);
+            Assert.IsTrue(player.CheckForOnePair());
+            Assert.AreEqual(13, player.onePairSum);
         }
     }
 }

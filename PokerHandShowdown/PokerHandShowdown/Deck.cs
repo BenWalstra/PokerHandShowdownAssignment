@@ -37,13 +37,16 @@ namespace PokerHandShowdown
                     if(suit == Suits.Heart)
                     {
                         card = new Heart(value);
-                    }else if(suit == Suits.Spade)
+                    }
+                    else if(suit == Suits.Spade)
                     {
                         card = new Spade(value);
-                    } else if(suit == Suits.Club)
+                    } 
+                    else if(suit == Suits.Club)
                     {
                         card = new Club(value);
-                    } else
+                    } 
+                    else
                     {
                         card = new Diamond(value);
                     }
